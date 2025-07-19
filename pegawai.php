@@ -150,10 +150,10 @@
 
         // Redirect berdasarkan hak akses
         if ($hak_akses == 'Staf') {
-          header("Location: /surat_keterangan_desa/demo1/main2.php");
+          header("Location: /demo1/main2.php");
           exit();
         } elseif ($hak_akses == 'Pemohon') {
-          header("Location: /surat_keterangan_desa/demo1/main.php");
+          header("Location: /demo1/main.php");
           exit();
         }
       } else {
