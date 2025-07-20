@@ -70,29 +70,37 @@ $nama = $data['nama'];
 
 <?php
 if (isset($_POST['kirim'])) {
-	$nik = $_POST['nik'];
-	$nama_ktp = isset($_FILES['ktp']);
-	$file_ktp = $_POST['nik'] . "_" . ".jpg";
-	$nama_kk = isset($_FILES['kk']);
-	$file_kk = $_POST['nik'] . "_" . ".jpg";
-	$nama_usaha = $_POST['nama_usaha'];
-	$jenis_usaha = $_POST['jenis_usaha'];
-	$alamat_usaha = $_POST['alamat_usaha'];
-	$nama_pengantar = isset($_FILES['pengantar_rt_rw']);
-	$file_pengantar = $_POST['nik'] . "_pengantar_rt_rw.jpg";
+	$nik            = $_POST['nik'];
+	$nama_usaha     = $_POST['nama_usaha'];
+	$jenis_usaha    = $_POST['jenis_usaha'];
+	$alamat_usaha   = $_POST['alamat_usaha'];
 
+	// Nama file unik menggunakan timestamp
+	$uniq = time();
+
+	$file_ktp       = $nik . "_ktp_" . $uniq . ".jpg";
+	$file_kk        = $nik . "_kk_" . $uniq . ".jpg";
+	$file_pengantar = $nik . "_pengantar_rt_rw_" . $uniq . ".jpg";
+
+	// Query simpan data
 	$sql = "INSERT INTO data_request_skp 
-        (nik, scan_ktp, scan_kk, scan_pengantar_rt_rw, nama_usaha, jenis_usaha, alamat_usaha) 
-        VALUES 
-        ('$nik', '$file_ktp', '$file_kk', '$file_pengantar', '$nama_usaha', '$jenis_usaha', '$alamat_usaha')";
+			(nik, scan_ktp, scan_kk, scan_pengantar_rt_rw, nama_usaha, jenis_usaha, alamat_usaha) 
+			VALUES 
+			('$nik', '$file_ktp', '$file_kk', '$file_pengantar', '$nama_usaha', '$jenis_usaha', '$alamat_usaha')";
 	$query = mysqli_query($konek1, $sql) or die(mysqli_error($konek1));
 
-
 	if ($query) {
-		// echo "<script>alert('berhasil masuk ke simpan pak')</script>";
-		copy($_FILES['ktp']['tmp_name'], "../dataFoto/scan_ktp/" . $file_ktp);
-		copy($_FILES['kk']['tmp_name'], "../dataFoto/scan_kk/" . $file_kk);
-		copy($_FILES['pengantar_rt_rw']['tmp_name'], "../dataFoto/scan_pengantar_rt_rw/" . $file_pengantar);
+		// Cek dan salin file jika ada
+		if (is_uploaded_file($_FILES['ktp']['tmp_name'])) {
+			copy($_FILES['ktp']['tmp_name'], "../dataFoto/scan_ktp/" . $file_ktp);
+		}
+		if (is_uploaded_file($_FILES['kk']['tmp_name'])) {
+			copy($_FILES['kk']['tmp_name'], "../dataFoto/scan_kk/" . $file_kk);
+		}
+		if (is_uploaded_file($_FILES['pengantar_rt_rw']['tmp_name'])) {
+			copy($_FILES['pengantar_rt_rw']['tmp_name'], "../dataFoto/scan_pengantar_rt_rw/" . $file_pengantar);
+		}
+
 		echo "<script language='javascript'>swal('Selamat...', 'Kirim Berhasil', 'success');</script>";
 		echo '<meta http-equiv="refresh" content="3; url=?halaman=tampil_status">';
 	} else {
@@ -100,5 +108,4 @@ if (isset($_POST['kirim'])) {
 		echo '<meta http-equiv="refresh" content="3; url=?halaman=request_skp">';
 	}
 }
-
 ?>

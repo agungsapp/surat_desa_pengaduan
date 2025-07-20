@@ -68,16 +68,15 @@ $nama = $data['nama'];
 		</form>
 	</div>
 </div>
-
 <?php
 if (isset($_POST['kirim'])) {
 	$nik        = $_POST['nik'];
 	$keperluan  = $_POST['keperluan'];
 
-	// Nama file unik
-	$file_ktp = $nik . "_ktp.jpg";
-	$file_kk  = $nik . "_kk.jpg";
-
+	// Nama file unik berdasarkan waktu + nik
+	$uniq = time(); // atau gunakan uniqid()
+	$file_ktp = $nik . "_ktp_" . $uniq . ".jpg";
+	$file_kk  = $nik . "_kk_"  . $uniq . ".jpg";
 
 	// Simpan ke DB
 	$sql = "INSERT INTO data_request_sktm (nik, scan_ktp, scan_kk, keperluan, status) 

@@ -28,6 +28,7 @@ if (isset($_GET['id_request_sku'])) {
 					<div class="card-body">
 						<div class="row">
 							<div class="col-md-6 col-lg-6">
+								<input type="hidden" name="id_request_sku" value="<?= $id; ?>">
 								<div class="form-group">
 									<label>NIK</label>
 									<input type="text" name="nik" class="form-control" value="<?= $nik . ' - ' . $nama; ?>" readonly>
@@ -73,20 +74,39 @@ if (isset($_GET['id_request_sku'])) {
 if (isset($_POST['ubah'])) {
 	$usaha = $_POST['usaha'];
 	$keperluan = $_POST['keperluan'];
-	$nama_ktp = isset($_FILES['ktp']);
-	$file_ktp = $_POST['nik'] . "_" . ".jpg";
-	$nama_kk = isset($_FILES['kk']);
-	$file_kk = $_POST['nik'] . "_" . ".jpg";
-	$sql = "UPDATE data_request_sku SET
-    usaha='$usaha',
-    keperluan='$keperluan',
-    scan_ktp='$file_ktp',
-    scan_kk='$file_kk' WHERE id_request_sku=$id";
-	$query = mysqli_query($konek1, $sql);
+	$nik = $_POST['nik'];
+	$id = $_POST['id_request_sku']; // pastikan ID ini dikirim dari form
+
+	// Inisialisasi query
+	$sql_update = "UPDATE data_request_sku SET 
+		usaha='$usaha',
+		keperluan='$keperluan'";
+
+	// Cek upload KTP
+	if (isset($_FILES['ktp']) && $_FILES['ktp']['error'] == 0) {
+		$file_ktp = $nik . "_ktp.jpg";
+		$sql_update .= ", scan_ktp='$file_ktp'";
+		$ktp_uploaded = true;
+	}
+
+	// Cek upload KK
+	if (isset($_FILES['kk']) && $_FILES['kk']['error'] == 0) {
+		$file_kk = $nik . "_kk.jpg";
+		$sql_update .= ", scan_kk='$file_kk'";
+		$kk_uploaded = true;
+	}
+
+	$sql_update .= " WHERE id_request_sku=$id";
+	$query = mysqli_query($konek1, $sql_update);
 
 	if ($query) {
-		copy($_FILES['ktp']['tmp_name'], "../dataFoto/scan_ktp/" . $file_ktp);
-		copy($_FILES['kk']['tmp_name'], "../dataFoto/scan_kk/" . $file_kk);
+		// Copy file jika memang diupload
+		if (!empty($ktp_uploaded)) {
+			copy($_FILES['ktp']['tmp_name'], "../dataFoto/scan_ktp/" . $file_ktp);
+		}
+		if (!empty($kk_uploaded)) {
+			copy($_FILES['kk']['tmp_name'], "../dataFoto/scan_kk/" . $file_kk);
+		}
 		echo "<script language='javascript'>swal('Selamat...', 'Ubah Berhasil', 'success');</script>";
 		echo '<meta http-equiv="refresh" content="3; url=?halaman=tampil_status">';
 	} else {
@@ -94,5 +114,4 @@ if (isset($_POST['ubah'])) {
 		echo '<meta http-equiv="refresh" content="3; url=?halaman=tampil_status">';
 	}
 }
-
 ?>

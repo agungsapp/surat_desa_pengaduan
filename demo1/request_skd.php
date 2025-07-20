@@ -27,14 +27,12 @@ $nama = $data['nama'];
 								<div class="form-group">
 									<input type="hidden" name="nik" class="form-control" value="<?= $nik; ?>" readonly>
 								</div>
-								<div class="form-group">
-									<label>Keperluan</label>
-									<input type="text" name="keperluan" class="form-control" placeholder="Keperluan Anda.." autofocus>
-								</div>
-								<div class="form-group">
-									<label>Alamat</label>
-									<input type="text" name="alamat" class="form-control" placeholder="Masukan alamat lengkap (contoh: nama jalan, rt/rw, nama desa..)">
-								</div>
+
+								<input type="hidden" name="keperluan" class="form-control" placeholder="Keperluan Anda.." value="kosong" autofocus>
+
+
+								<input type="hidden" name="alamat" class="form-control" value="kosong" placeholder="Masukan alamat lengkap (contoh: nama jalan, rt/rw, nama desa..)">
+
 							</div>
 							<div class="col-md-6 col-lg-6">
 								<div class="form-group">
@@ -62,17 +60,27 @@ $nama = $data['nama'];
 if (isset($_POST['kirim'])) {
 	$nik = $_POST['nik'];
 	$keperluan = $_POST['keperluan'];
-	$nama_ktp = isset($_FILES['ktp']);
-	$file_ktp = $_POST['nik'] . "_" . ".jpg";
-	$nama_kk = isset($_FILES['kk']);
-	$file_kk = $_POST['nik'] . "_" . ".jpg";
-	$nik = $_POST['nik'];
-	$sql = "INSERT INTO data_request_skd (nik,scan_ktp,scan_kk,keperluan) VALUES ('$nik','$file_ktp','$file_kk','$keperluan')";
+
+	// Buat nama file yang unik
+	$uniq = time(); // atau gunakan uniqid() untuk lebih acak
+
+	$file_ktp = $nik . "_ktp_" . $uniq . ".jpg";
+	$file_kk  = $nik . "_kk_" . $uniq . ".jpg";
+
+	// Simpan ke database
+	$sql = "INSERT INTO data_request_skd (nik, scan_ktp, scan_kk, keperluan) 
+	        VALUES ('$nik', '$file_ktp', '$file_kk', '$keperluan')";
 	$query = mysqli_query($konek1, $sql) or die(mysqli_error($konek1));
 
 	if ($query) {
-		copy($_FILES['ktp']['tmp_name'], "../dataFoto/scan_ktp/" . $file_ktp);
-		copy($_FILES['kk']['tmp_name'], "../dataFoto/scan_kk/" . $file_kk);
+		// Simpan file ke folder jika benar diupload
+		if (is_uploaded_file($_FILES['ktp']['tmp_name'])) {
+			copy($_FILES['ktp']['tmp_name'], "../dataFoto/scan_ktp/" . $file_ktp);
+		}
+		if (is_uploaded_file($_FILES['kk']['tmp_name'])) {
+			copy($_FILES['kk']['tmp_name'], "../dataFoto/scan_kk/" . $file_kk);
+		}
+
 		echo "<script language='javascript'>swal('Selamat...', 'Kirim Berhasil', 'success');</script>";
 		echo '<meta http-equiv="refresh" content="3; url=?halaman=tampil_status">';
 	} else {
@@ -80,5 +88,4 @@ if (isset($_POST['kirim'])) {
 		echo '<meta http-equiv="refresh" content="3; url=?halaman=request_skd">';
 	}
 }
-
 ?>
