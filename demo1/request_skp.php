@@ -8,6 +8,7 @@ $query = mysqli_query($konek1, $tampil_nik);
 $data = mysqli_fetch_array($query, MYSQLI_BOTH);
 $nik = $data['nik'];
 $nama = $data['nama'];
+// var_dump($data);
 ?>
 <div class="page-inner">
 	<div class="row">
@@ -88,6 +89,7 @@ if (isset($_POST['kirim'])) {
 
 
 	if ($query) {
+		// echo "<script>alert('berhasil masuk ke simpan pak')</script>";
 		copy($_FILES['ktp']['tmp_name'], "../dataFoto/scan_ktp/" . $file_ktp);
 		copy($_FILES['kk']['tmp_name'], "../dataFoto/scan_kk/" . $file_kk);
 		copy($_FILES['pengantar_rt_rw']['tmp_name'], "../dataFoto/scan_pengantar_rt_rw/" . $file_pengantar);

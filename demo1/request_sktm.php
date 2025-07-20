@@ -71,19 +71,28 @@ $nama = $data['nama'];
 
 <?php
 if (isset($_POST['kirim'])) {
-	$nik = $_POST['nik'];
-	$keperluan = $_POST['keperluan'];
-	$nama_ktp = isset($_FILES['ktp']);
-	$file_ktp = $_POST['nik'] . "_" . ".jpg";
-	$nama_kk = isset($_FILES['kk']);
-	$file_kk = $_POST['nik'] . "_" . ".jpg";
-	$sql = "INSERT INTO data_request_sktm (nik,scan_ktp,scan_kk,keperluan) VALUES ('$nik','$file_ktp','$file_kk','$keperluan')";
+	$nik        = $_POST['nik'];
+	$keperluan  = $_POST['keperluan'];
+
+	// Nama file unik
+	$file_ktp = $nik . "_ktp.jpg";
+	$file_kk  = $nik . "_kk.jpg";
+
+
+	// Simpan ke DB
+	$sql = "INSERT INTO data_request_sktm (nik, scan_ktp, scan_kk, keperluan, status) 
+	        VALUES ('$nik', '$file_ktp', '$file_kk', '$keperluan', '2')";
 	$query = mysqli_query($konek1, $sql) or die(mysqli_error($konek1));
 
-
 	if ($query) {
-		copy($_FILES['ktp']['tmp_name'], "../dataFoto/scan_ktp/" . $file_ktp);
-		copy($_FILES['kk']['tmp_name'], "../dataFoto/scan_kk/" . $file_kk);
+		// Cek file benar-benar diupload
+		if (is_uploaded_file($_FILES['ktp']['tmp_name'])) {
+			copy($_FILES['ktp']['tmp_name'], "../dataFoto/scan_ktp/" . $file_ktp);
+		}
+		if (is_uploaded_file($_FILES['kk']['tmp_name'])) {
+			copy($_FILES['kk']['tmp_name'], "../dataFoto/scan_kk/" . $file_kk);
+		}
+
 		echo "<script language='javascript'>swal('Selamat...', 'Kirim Berhasil', 'success');</script>";
 		echo '<meta http-equiv="refresh" content="3; url=?halaman=tampil_status">';
 	} else {
@@ -91,5 +100,4 @@ if (isset($_POST['kirim'])) {
 		echo '<meta http-equiv="refresh" content="3; url=?halaman=request_sktm">';
 	}
 }
-
 ?>

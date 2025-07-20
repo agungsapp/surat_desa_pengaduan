@@ -41,7 +41,6 @@ include_once KONEKSI_PATH . '/konek3.php';
 			  left join tb_kk k on a.id_kk=k.id_kk where status='Ada'");
 					while ($data = $sql->fetch_assoc()) {
 					?>
-
 						<tr>
 							<td>
 								<?php echo $no++; ?>

@@ -32,7 +32,16 @@ if (isset($_GET['id_request_sktm'])) {
 					<div class="card-header">
 						<div class="form-group">
 							<br>
-							<a href="/demo1/main.php?halaman=tampil_status" name="ubah" class="btn btn-info btn-border btn-round btn-sm">
+							<?php
+							$akses = $_SESSION['hak_akses'];
+							// echo $akses == 'Staf';
+							if ($akses == 'Staf') {
+								$link = "/demo1/main2.php?halaman=permohonan_surat";
+							} else {
+								$link = "/demo1/main.php?halaman=tampil_status";
+							}
+							?>
+							<a href="<?= $link; ?>" name="ubah" class="btn btn-info btn-border btn-round btn-sm">
 								<span class="btn-label">
 									<i class="fas fa-edit"></i>
 								</span>
