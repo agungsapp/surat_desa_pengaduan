@@ -58,10 +58,13 @@
 												<!-- Checkbox -->
 												<input type="checkbox" name="check[]" value="<?= $id_request_sktm ?>" class="form-check-input m-0">
 
-												<!-- ACC Button -->
-												<button type="submit" name="acc" class="btn btn-success btn-sm px-2" title="Setujui Permohonan SKTM">
-													<i class="fas fa-check-circle me-1"></i> ACC
-												</button>
+												<form action="" method="post">
+													<input type="hidden" name="id_request_sktm" value="<?= $id_request_sktm; ?>">
+													<!-- ACC Button -->
+													<button type="submit" name="acc_sktm" class="btn btn-success btn-sm px-2" title="Setujui Permohonan SKTM">
+														<i class="fas fa-check-circle me-1"></i> ACC
+													</button>
+												</form>
 
 												<!-- Detail Button -->
 												<a href="?halaman=detail_sktm&id_request_sktm=<?= $id_request_sktm ?>"
@@ -150,9 +153,12 @@
 												<input type="checkbox" name="check[]" value="<?= $id_request_sku ?>" class="form-check-input m-0">
 
 												<!-- ACC Button -->
-												<button type="submit" name="acc" class="btn btn-success btn-sm" title="Setujui Permohonan">
-													<i class="fas fa-check-circle me-1"></i> ACC
-												</button>
+												<form action="" method="post">
+													<input type="hidden" name="id_request_sku" value="<?= $id_request_sku; ?>">
+													<button type="submit" name="acc_sku" class="btn btn-success btn-sm" title="Setujui Permohonan">
+														<i class="fas fa-check-circle me-1"></i> ACC
+													</button>
+												</form>
 
 												<!-- Detail Button -->
 												<a href="?halaman=detail_sku&id_request_sku=<?= $id_request_sku ?>"
@@ -237,9 +243,13 @@
 												<input type="checkbox" name="check[]" value="<?= $id_request_skp ?>" class="form-check-input">
 
 												<!-- ACC Button -->
-												<button type="submit" name="acc" class="btn btn-success btn-sm" title="Setujui Permohonan">
-													<i class="fas fa-check-circle"></i> ACC
-												</button>
+												<form action="" method="post">
+													<input type="hidden" name="id_request_skp" value="<?= $id_request_skp; ?>">
+													<button type="submit" name="acc_skp" class="btn btn-success btn-sm" title="Setujui Permohonan">
+														<i class="fas fa-check-circle"></i> ACC
+													</button>
+												</form>
+
 
 												<!-- Detail Button -->
 												<a href="?halaman=detail_skp&id_request_skp=<?= $id_request_skp ?>"
@@ -323,9 +333,12 @@
 													<input type="checkbox" name="check[]" value="<?php echo $id_request_skd; ?>" class="mr-2">
 
 													<!-- ACC Button -->
-													<button type="submit" name="acc" class="btn btn-success btn-sm" title="ACC Permohonan">
-														<i class="fas fa-check"></i> ACC
-													</button>
+													<form action="" method="post">
+														<input type="hidden" name="id_request_skd" value="<?= $id_request_skd; ?>">
+														<button type="submit" name="acc_skd" class="btn btn-success btn-sm" title="ACC Permohonan">
+															<i class="fas fa-check"></i> ACC
+														</button>
+													</form>
 
 													<!-- Cek Data Button -->
 													<a href="?halaman=detail_skd&id_request_skd=<?= $id_request_skd; ?>"
@@ -367,7 +380,57 @@
 			</div>
 		</div>
 
+		<?php
 
+		if (isset($_POST['acc_sktm'])) {
+			$id_request_sktm = $_POST['id_request_sktm'];
+			$sql = mysqli_query($konek1, "UPDATE data_request_sktm SET
+					status='3' WHERE id_request_sktm='$id_request_sktm'");
+			if ($sql) {
+				echo "<script language='javascript'>swal('Selamat...', 'Acc Berhasil!', 'success');</script>";
+				echo '<meta http-equiv="refresh" content="3; url=?halaman=permohonan_surat">';
+			} else {
+				echo "<script language='javascript'>swal('Gagal...', 'Kirim Gagal!', 'error');</script>";
+				echo '<meta http-equiv="refresh" content="3; url=?halaman=permohonan_surat">';
+			}
+		}
+		if (isset($_POST['acc_sku'])) {
+			$id_request_sku = $_POST['id_request_sku'];
+			$sql = mysqli_query($konek1, "UPDATE data_request_sku SET
+					status='3' WHERE id_request_sku='$id_request_sku'");
+			if ($sql) {
+				echo "<script language='javascript'>swal('Selamat...', 'Acc Berhasil!', 'success');</script>";
+				echo '<meta http-equiv="refresh" content="3; url=?halaman=permohonan_surat">';
+			} else {
+				echo "<script language='javascript'>swal('Gagal...', 'Kirim Gagal!', 'error');</script>";
+				echo '<meta http-equiv="refresh" content="3; url=?halaman=permohonan_surat">';
+			}
+		}
+		if (isset($_POST['acc_skp'])) {
+			$id_request_skp = $_POST['id_request_skp'];
+			$sql = mysqli_query($konek1, "UPDATE data_request_skp SET
+					status='3' WHERE id_request_skp='$id_request_skp'");
+			if ($sql) {
+				echo "<script language='javascript'>swal('Selamat...', 'Acc Berhasil!', 'success');</script>";
+				echo '<meta http-equiv="refresh" content="3; url=?halaman=permohonan_surat">';
+			} else {
+				echo "<script language='javascript'>swal('Gagal...', 'Kirim Gagal!', 'error');</script>";
+				echo '<meta http-equiv="refresh" content="3; url=?halaman=permohonan_surat">';
+			}
+		}
+		if (isset($_POST['acc_skd'])) {
+			$id_request_skd = $_POST['id_request_skd'];
+			$sql = mysqli_query($konek1, "UPDATE data_request_skd SET
+					status='3' WHERE id_request_skd='$id_request_skd'");
+			if ($sql) {
+				echo "<script language='javascript'>swal('Selamat...', 'Acc Berhasil!', 'success');</script>";
+				echo '<meta http-equiv="refresh" content="3; url=?halaman=permohonan_surat">';
+			} else {
+				echo "<script language='javascript'>swal('Gagal...', 'Kirim Gagal!', 'error');</script>";
+				echo '<meta http-equiv="refresh" content="3; url=?halaman=permohonan_surat">';
+			}
+		}
+		?>
 
 
 	</div>
