@@ -81,7 +81,7 @@ if (isset($_POST['kirim'])) {
 
 	// Simpan ke DB
 	$sql = "INSERT INTO data_request_sktm (nik, scan_ktp, scan_kk, keperluan, status) 
-	        VALUES ('$nik', '$file_ktp', '$file_kk', '$keperluan', '2')";
+	        VALUES ('$nik', '$file_ktp', '$file_kk', '$keperluan', '0')";
 	$query = mysqli_query($konek1, $sql) or die(mysqli_error($konek1));
 
 	if ($query) {
