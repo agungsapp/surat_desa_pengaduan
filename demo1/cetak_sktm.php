@@ -3,10 +3,10 @@ include '../koneksi/konek1.php';
 include '../phpqrcode/qrlib.php';
 
 // Ambil id dan data dari database
-if(isset($_GET['id_request_sktm'])){
+if (isset($_GET['id_request_sktm'])) {
     $id = $_GET['id_request_sktm'];
     $sql = "SELECT * FROM data_request_sktm NATURAL JOIN data_user WHERE id_request_sktm='$id'";
-    $query = mysqli_query($konek1,$sql);
+    $query = mysqli_query($konek1, $sql);
     $data = mysqli_fetch_array($query, MYSQLI_BOTH);
 
     // Ambil data untuk surat
@@ -36,10 +36,9 @@ if(isset($_GET['id_request_sktm'])){
     }
 
     // === Generate QR Code setelah semua data aman ===
-    $link_verifikasi = "http://localhost/surat_keterangan_desa/verifikasi_surat.php?jenis=sktm&id=$id";
+    $link_verifikasi = "https://desabogorejo.my.id/verifikasi_surat.php?jenis=sktm&id=$id";
     $nama_file_qr = "../phpqrcode/sktm_qr_$id.png";
     QRcode::png($link_verifikasi, $nama_file_qr, QR_ECLEVEL_H, 4);
-    
 } else {
     die("ID request tidak ditemukan!");
 }
@@ -48,47 +47,56 @@ if(isset($_GET['id_request_sktm'])){
 
 <link href="css/sweetalert.css" rel="stylesheet" type="text/css">
 <script src="js/jquery-2.1.3.min.js"></script>
-<script src="js/sweetalert.min.js"></script> 
- <div class="panel-header bg-primary-gradient">
-					<div class="page-inner py-5">
-						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
-							<div>
-								<h2 class="text-white pb-2 fw-bold"></h2>
-							</div>
-						</div>
-					</div>
-                </div>
-                                        </form>
-                                        <?php
-                                        if(isset($_POST['ttd'])){
-                                            $ket="Surat sedang dalam proses cetak";
-                                            $tgl = $_POST['tgl_acc'];
-                                            $update = mysqli_query($konek1,"UPDATE data_request_sktm SET acc='$tgl', status=2, keterangan='$ket' WHERE id_request_sktm=$id");
-                                            if($update){
-                                                echo "<script language='javascript'>swal('Selamat...', 'ACC Lurah Berhasil', 'success');</script>" ;
-                                                echo '<meta http-equiv="refresh" content="3; url=?halaman=belum_acc_sktm">';
-                                            }else{
-                                                echo "<script language='javascript'>swal('Gagal...', 'ACC Lurah Gagal', 'error');</script>" ;
-                                                echo '<meta http-equiv="refresh" content="3; url=?halaman=view_sktm">';
-                                            }
-
-                                        }
-                                        ?>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-                    <script>
+<script src="js/sweetalert.min.js"></script>
+<div class="panel-header bg-primary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <h2 class="text-white pb-2 fw-bold"></h2>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<?php
+if (isset($_POST['ttd'])) {
+    $ket = "Surat sedang dalam proses cetak";
+    $tgl = $_POST['tgl_acc'];
+    $update = mysqli_query($konek1, "UPDATE data_request_sktm SET acc='$tgl', status=2, keterangan='$ket' WHERE id_request_sktm=$id");
+    if ($update) {
+        echo "<script language='javascript'>swal('Selamat...', 'ACC Lurah Berhasil', 'success');</script>";
+        echo '<meta http-equiv="refresh" content="3; url=?halaman=belum_acc_sktm">';
+    } else {
+        echo "<script language='javascript'>swal('Gagal...', 'ACC Lurah Gagal', 'error');</script>";
+        echo '<meta http-equiv="refresh" content="3; url=?halaman=view_sktm">';
+    }
+}
+?>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
     window.onload = function() {
         window.print();
     }
 </script>
-                    <?php
+<?php
 // Format tanggal Indonesia
 $bulan = [
-    1 => 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    1 => 'Januari',
+    'Februari',
+    'Maret',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Agustus',
+    'September',
+    'Oktober',
+    'November',
+    'Desember'
 ];
 
 $tanggal = date('d');
@@ -125,14 +133,38 @@ $format3 = "$tanggal $bulanIndo $tahun"; // Contoh hasil: 09 Mei 2025
     <p style="font-size: 12pt;">Yang bertanda tangan di bawah ini, Kepala Desa Bogorejo Kecamatan Gedong Tataan Kabupaten Pesawaran, menerangkan dengan sesungguhnya bahwa:</p>
 
     <table style="margin-left: 20px;">
-        <tr><td width="180px">Nama</td><td>: <?= strtoupper($nama);?></td></tr>
-        <tr><td>NIK</td><td>: <?= $nik; ?></td></tr>
-        <tr><td>Tempat, Tanggal Lahir</td><td>: <?= $tempat . ', ' . $format2; ?></td></tr>
-        <tr><td>Jenis Kelamin</td><td>: <?= $jekel; ?></td></tr>
-        <tr><td>Agama</td><td>: <?= $agama; ?></td></tr>
-        <tr><td>Status Perkawinan</td><td>: <?= $kawin; ?></td></tr>
-        <tr><td>Pekerjaan</td><td>: <?= $pekerjaan; ?></td></tr>
-        <tr><td>Alamat</td><td>: <?= $alamat; ?></td></tr>
+        <tr>
+            <td width="180px">Nama</td>
+            <td>: <?= strtoupper($nama); ?></td>
+        </tr>
+        <tr>
+            <td>NIK</td>
+            <td>: <?= $nik; ?></td>
+        </tr>
+        <tr>
+            <td>Tempat, Tanggal Lahir</td>
+            <td>: <?= $tempat . ', ' . $format2; ?></td>
+        </tr>
+        <tr>
+            <td>Jenis Kelamin</td>
+            <td>: <?= $jekel; ?></td>
+        </tr>
+        <tr>
+            <td>Agama</td>
+            <td>: <?= $agama; ?></td>
+        </tr>
+        <tr>
+            <td>Status Perkawinan</td>
+            <td>: <?= $kawin; ?></td>
+        </tr>
+        <tr>
+            <td>Pekerjaan</td>
+            <td>: <?= $pekerjaan; ?></td>
+        </tr>
+        <tr>
+            <td>Alamat</td>
+            <td>: <?= $alamat; ?></td>
+        </tr>
     </table>
 
     <br>
@@ -140,41 +172,61 @@ $format3 = "$tanggal $bulanIndo $tahun"; // Contoh hasil: 09 Mei 2025
     <p style="font-size: 12pt;">Nama tersebut di atas adalah anak kandung dari:</p>
 
     <table style="margin-left: 20px;">
-        <tr><td width="180px">Nama Ayah</td><td>:  <?= strtoupper($nm_ayah);?></td></td></tr>
-        <tr><td>Nama Ibu</td><td>: <?= strtoupper($nm_ibu);?></td></td></tr>
-        <tr><td>Pekerjaan Ayah</td><td>: <?= $pk_ayah;?></td></td></tr>
-        <tr><td>Pekerjaan Ibu</td><td>:  <?= $pk_ibu;?></td></td></tr>
-        <tr><td>Alamat</td><td>: <?= $alamat; ?></td></tr>
+        <tr>
+            <td width="180px">Nama Ayah</td>
+            <td>: <?= strtoupper($nm_ayah); ?></td>
+            </td>
+        </tr>
+        <tr>
+            <td>Nama Ibu</td>
+            <td>: <?= strtoupper($nm_ibu); ?></td>
+            </td>
+        </tr>
+        <tr>
+            <td>Pekerjaan Ayah</td>
+            <td>: <?= $pk_ayah; ?></td>
+            </td>
+        </tr>
+        <tr>
+            <td>Pekerjaan Ibu</td>
+            <td>: <?= $pk_ibu; ?></td>
+            </td>
+        </tr>
+        <tr>
+            <td>Alamat</td>
+            <td>: <?= $alamat; ?></td>
+        </tr>
     </table>
 
     <br>
 
-    <p style="font-size: 12pt; margin: 0;">Nama tersebut adalah benar warga Desa Bogorejo, Kecamatan Gedong Tataan, Kabupaten Pesawaran berdasarkan keterangan yang ada pada kami benar bahwa yang bersangkutan tergolong keluarga yang   <u> Tidak mampu/miskin.</u></p>
+    <p style="font-size: 12pt; margin: 0;">Nama tersebut adalah benar warga Desa Bogorejo, Kecamatan Gedong Tataan, Kabupaten Pesawaran berdasarkan keterangan yang ada pada kami benar bahwa yang bersangkutan tergolong keluarga yang <u> Tidak mampu/miskin.</u></p>
     <p style="font-size: 12pt; margin: 0;">Surat keterangan ini dibuat untuk:</p>
-    
-<br>
-<div style="text-align: center;">
-    <u><strong style="font-size: 16pt;"><?= ucwords(strtolower($keperluan)); ?></strong></u><br>
-</div>
+
+    <br>
+    <div style="text-align: center;">
+        <u><strong style="font-size: 16pt;"><?= ucwords(strtolower($keperluan)); ?></strong></u><br>
+    </div>
 
 
-<br><p style="font-size: 12pt; margin: 0;">Demikian Surat Keterangan ini disampaikan, agar dipergunakan sebagaimana mestinya</p>
-    
+    <br>
+    <p style="font-size: 12pt; margin: 0;">Demikian Surat Keterangan ini disampaikan, agar dipergunakan sebagaimana mestinya</p>
+
     <br><br><br>
 
     <table width="100%">
-    <tr>
-        <td style="width: 20%;"></td> <!-- Mengatur lebar kiri lebih kecil -->
-        <td style="float: right; text-align: left; padding-right: 30px;"> <!-- Memberi jarak ke kanan dengan padding -->
-            Bogorejo, <?= $format3; ?><br>
-            KEPALA DESA BOGOREJO,<br><br>
-            <img src="../phpqrcode/sktm_qr_<?= $id; ?>.png" width="80" height="80"><br>
-<u><b>(HERMANSYAH)</b></u><br>
+        <tr>
+            <td style="width: 20%;"></td> <!-- Mengatur lebar kiri lebih kecil -->
+            <td style="float: right; text-align: left; padding-right: 30px;"> <!-- Memberi jarak ke kanan dengan padding -->
+                Bogorejo, <?= $format3; ?><br>
+                KEPALA DESA BOGOREJO,<br><br>
+                <img src="../phpqrcode/sktm_qr_<?= $id; ?>.png" width="80" height="80"><br>
+                <u><b>(HERMANSYAH)</b></u><br>
 
-        </td>
-        <td style="width: 20%;"></td> <!-- Menambah ruang kosong di kanan untuk menyeimbangkan -->
-    </tr>
-</table>
+            </td>
+            <td style="width: 20%;"></td> <!-- Menambah ruang kosong di kanan untuk menyeimbangkan -->
+        </tr>
+    </table>
 
 
 </div>

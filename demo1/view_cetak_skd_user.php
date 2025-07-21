@@ -39,7 +39,7 @@ if (isset($_GET['id_request_skd'])) {
     }
 
     // === Generate QR Code setelah semua data aman ===
-    $link_verifikasi = "http://localhost/surat_keterangan_desa/verifikasi_surat.php?jenis=skd&id=$id";
+    $link_verifikasi = "https://desabogorejo.my.id/verifikasi_surat.php?jenis=skd&id=$id";
     $nama_file_qr = "../phpqrcode/skd_qr_$id.png";
     QRcode::png($link_verifikasi, $nama_file_qr, QR_ECLEVEL_H, 4);
 } else {
