@@ -1,4 +1,5 @@
 <?php
+// error_reporting(90);
 include_once __DIR__ . '/../../../config.php';
 include_once KONEKSI_PATH . '/konek3.php';
 ?>

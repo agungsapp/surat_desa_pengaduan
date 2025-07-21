@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 
 ?>
 
@@ -38,11 +37,11 @@
 	<div class="wrapper">
 		<!-- Navbar -->
 		<nav class="main-header navbar navbar-expand navbar-red navbar-light" style="background-color: teal; padding: 0; margin: 0; width: 100%;"><!-- Left navbar links -->
-		
+
 
 			<!-- SEARCH FORM -->
 			<ul class="navbar-nav ml-auto">
-				
+
 				<li class="nav-item d-none d-sm-inline-block">
 					<a href="index.php" class="nav-link">
 						<font color="white">
@@ -53,198 +52,198 @@
 			</ul>
 
 		</nav>
-		
-				</nav>
-				<!-- /.sidebar-menu -->
-			</div>
-			<!-- /.sidebar -->
-		</aside>
 
-		<!-- Content Wrapper. Contains page content -->
-		
+		</nav>
+		<!-- /.sidebar-menu -->
+	</div>
+	<!-- /.sidebar -->
+	</aside>
 
-					<?php 
-      if(isset($_GET['page'])){
-          $hal = $_GET['page'];
-  
-          switch ($hal) {
-              
-				//Pengguna
-				case 'data-pengguna':
-					include "admin/pengguna/data_pengguna.php";
-					break;
-				case 'add-pengguna':
-					include "admin/pengguna/add_pengguna.php";
-					break;
-				case 'edit-pengguna':
-					include "admin/pengguna/edit_pengguna.php";
-					break;
-				case 'del-pengguna':
-					include "admin/pengguna/del_pengguna.php";
-					break;
+	<!-- Content Wrapper. Contains page content -->
 
-				//kartu KK
-				case 'data-kartu':
-					include "admin/kartu/data_kartu.php";
-					break;
-				case 'add-kartu':
-					include "admin/kartu/add_kartu.php";
-					break;
-				case 'edit-kartu':
-					include "admin/kartu/edit_kartu.php";
-					break;
-				case 'anggota':
-					include "admin/kartu/anggota.php";
-					break;
-				case 'del-anggota':
-					include "admin/kartu/del_anggota.php";
-					break;
-				case 'del-kartu':
-					include "admin/kartu/del_kartu.php";
-					break;
 
-				//penduduk
-				case 'data-pend':
-					include "admin/pend/data_pend.php";
-					break;
-				case 'add-pend':
-					include "admin/pend/add_pend.php";
-					break;
-				case 'edit-pend':
-					include "admin/pend/edit_pend.php";
-					break;
-				case 'del-pend':
-					include "admin/pend/del_pend.php";
-					break;
-				case 'view-pend':
-					include "admin/pend/view_pend.php";
-					break;
+	<?php
+	// include "surat/suket_lahir.php";
+	if (isset($_GET['page'])) {
+		$hal = $_GET['page'];
+		switch ($hal) {
 
-				//lahir
-				case 'data-lahir':
-					include "admin/lahir/data_lahir.php";
-					break;
-				case 'add-lahir':
-					include "admin/lahir/add_lahir.php";
-					break;
-				case 'edit-lahir':
-					include "admin/lahir/edit_lahir.php";
-					break;
-				case 'del-lahir':
-					include "admin/lahir/del_lahir.php";
-					break;
+			//Pengguna
+			case 'data-pengguna':
+				include "admin/pengguna/data_pengguna.php";
+				break;
+			case 'add-pengguna':
+				include "admin/pengguna/add_pengguna.php";
+				break;
+			case 'edit-pengguna':
+				include "admin/pengguna/edit_pengguna.php";
+				break;
+			case 'del-pengguna':
+				include "admin/pengguna/del_pengguna.php";
+				break;
 
-				//mendu
-				case 'data-mendu':
-					include "admin/mendu/data_mendu.php";
-					break;
-				case 'add-mendu':
-					include "admin/mendu/add_mendu.php";
-					break;
-				case 'edit-mendu':
-					include "admin/mendu/edit_mendu.php";
-					break;
-				case 'del-mendu':
-					include "admin/mendu/del_mendu.php";
-					break;
+			//kartu KK
+			case 'data-kartu':
+				include "admin/kartu/data_kartu.php";
+				break;
+			case 'add-kartu':
+				include "admin/kartu/add_kartu.php";
+				break;
+			case 'edit-kartu':
+				include "admin/kartu/edit_kartu.php";
+				break;
+			case 'anggota':
+				include "admin/kartu/anggota.php";
+				break;
+			case 'del-anggota':
+				include "admin/kartu/del_anggota.php";
+				break;
+			case 'del-kartu':
+				include "admin/kartu/del_kartu.php";
+				break;
 
-				//pindah
-				case 'data-pindah':
-					include "admin/pindah/data_pindah.php";
-					break;
-				case 'add-pindah':
-					include "admin/pindah/add_pindah.php";
-					break;
-				case 'edit-pindah':
-					include "admin/pindah/edit_pindah.php";
-					break;
-				case 'del-pindah':
-					include "admin/pindah/del_pindah.php";
-					break;
+			//penduduk
+			case 'data-pend':
+				include "admin/pend/data_pend.php";
+				break;
+			case 'add-pend':
+				include "admin/pend/add_pend.php";
+				break;
+			case 'edit-pend':
+				include "admin/pend/edit_pend.php";
+				break;
+			case 'del-pend':
+				include "admin/pend/del_pend.php";
+				break;
+			case 'view-pend':
+				include "admin/pend/view_pend.php";
+				break;
 
-				//datang
-				case 'data-datang':
-					include "admin/datang/data_datang.php";
-					break;
-				case 'add-datang':
-					include "admin/datang/add_datang.php";
-					break;
-				case 'edit-datang':
-					include "admin/datang/edit_datang.php";
-					break;
-				case 'del-datang':
-					include "admin/datang/del_datang.php";
-					break;
-					
-				//suket
-				case 'suket-domisili':
-					include "surat/suket_domisili.php";
-					break;
-				case 'suket-lahir':
-					include "surat/suket_lahir.php";
-					break;
-				case 'suket-mati':
-					include "surat/suket_mati.php";
-					break;
-				case 'suket-datang':
-					include "surat/suket_datang.php";
-					break;
-				case 'suket-pindah':
-					include "surat/suket_pindah.php";
-					break;
-				
-					//laporan
-				case 'data penduduk':
-					include "false";
-					break;
-				case 'data kartu keluarga':
-					include "false";
-					break;
-				case 'data lahir':
-					include "false";
-					break;
-				case 'data meninggal':
-					include "false";
-					break;
-				case 'data pendatang':
-					include "false";
-					break;
-				case 'data pindah':
-					include "false";
-					break;
-	
+			//lahir
+			case 'data-lahir':
+				include "admin/lahir/data_lahir.php";
+				break;
+			case 'add-lahir':
+				include "admin/lahir/add_lahir.php";
+				break;
+			case 'edit-lahir':
+				include "admin/lahir/edit_lahir.php";
+				break;
+			case 'del-lahir':
+				include "admin/lahir/del_lahir.php";
+				break;
 
-          
-              //default/false
-             default:
-                  echo "<center><b>FITUR IKI DURUNG DADI BOSS, TERIMA KASIH!</b></center>";
-                  break;    
-          }
-      }else{
-        // Auto Halaman Home Pengguna
-         
-          }
-    ?>
+			//mendu
+			case 'data-mendu':
+				include "admin/mendu/data_mendu.php";
+				break;
+			case 'add-mendu':
+				include "admin/mendu/add_mendu.php";
+				break;
+			case 'edit-mendu':
+				include "admin/mendu/edit_mendu.php";
+				break;
+			case 'del-mendu':
+				include "admin/mendu/del_mendu.php";
+				break;
 
-				</div>
-			</section>
-			<!-- /.content -->
+			//pindah
+			case 'data-pindah':
+				include "admin/pindah/data_pindah.php";
+				break;
+			case 'add-pindah':
+				include "admin/pindah/add_pindah.php";
+				break;
+			case 'edit-pindah':
+				include "admin/pindah/edit_pindah.php";
+				break;
+			case 'del-pindah':
+				include "admin/pindah/del_pindah.php";
+				break;
+
+			//datang
+			case 'data-datang':
+				include "admin/datang/data_datang.php";
+				break;
+			case 'add-datang':
+				include "admin/datang/add_datang.php";
+				break;
+			case 'edit-datang':
+				include "admin/datang/edit_datang.php";
+				break;
+			case 'del-datang':
+				include "admin/datang/del_datang.php";
+				break;
+
+			//suket
+			case 'suket-domisili':
+				include "surat/suket_domisili.php";
+				break;
+			case 'suket-lahir':
+				include "surat/suket_lahir.php";
+				break;
+			case 'suket-mati':
+				include "surat/suket_mati.php";
+				break;
+			case 'suket-datang':
+				include "surat/suket_datang.php";
+				break;
+			case 'suket-pindah':
+				include "surat/suket_pindah.php";
+				break;
+
+			//laporan
+			case 'data penduduk':
+				include "false";
+				break;
+			case 'data kartu keluarga':
+				include "false";
+				break;
+			case 'data lahir':
+				include "false";
+				break;
+			case 'data meninggal':
+				include "false";
+				break;
+			case 'data pendatang':
+				include "false";
+				break;
+			case 'data pindah':
+				include "false";
+				break;
+
+
+
+			//default/false
+			default:
+				echo "<center><b>FITUR IKI DURUNG DADI BOSS, TERIMA KASIH!</b></center>";
+				break;
+		}
+	} else {
+		// Auto Halaman Home Pengguna
+
+	}
+	?>
+
+	</div>
+	</section>
+	<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+	<footer class="main-footer">
+		<div class="float-right d-none d-sm-block">
+			Copyright &copy;
+			</a>
+			2025
 		</div>
-		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-			<div class="float-right d-none d-sm-block">
-				Copyright &copy;
-				</a>
-				2025
-			</div>
-			
-		</footer>
 
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark">
-			<!-- Control sidebar content goes here -->
-		</aside>
-		<!-- /.control-sidebar -->
+	</footer>
+
+	<!-- Control Sidebar -->
+	<aside class="control-sidebar control-sidebar-dark">
+		<!-- Control sidebar content goes here -->
+	</aside>
+	<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
 
