@@ -1,7 +1,8 @@
-<?php include 'koneksi/konek1.php';?>
+<?php include 'koneksi/konek1.php'; ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,12 +13,14 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #E0F7FA; /* Light background for contrast */
+            background: #E0F7FA;
+            /* Light background for contrast */
         }
 
         /* Header styling */
         header {
-            background-color: #4682B4; /* Steel Blue Sky */
+            background-color: #4682B4;
+            /* Steel Blue Sky */
             color: white;
             padding: 20px 0;
             text-align: center;
@@ -31,7 +34,7 @@
             background: white;
             margin: 20px auto;
             max-width: 900px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
 
@@ -40,7 +43,8 @@
             margin-bottom: 15px;
         }
 
-        p, ul {
+        p,
+        ul {
             color: #555;
             font-size: 16px;
         }
@@ -52,7 +56,8 @@
 
         /* Link styling */
         a {
-            color: #4682B4; /* Steel Blue Sky */
+            color: #4682B4;
+            /* Steel Blue Sky */
             text-decoration: none;
         }
 
@@ -74,12 +79,14 @@
 
         /* Footer or contact information section */
         footer {
-        background-color: #4682B4; /* Steel Blue Sky */
-        color: white; /* Menjadikan teks di footer berwarna putih */
-        padding: 15px 0;
-        text-align: center;
-        margin-top: 50px;
-}
+            background-color: #4682B4;
+            /* Steel Blue Sky */
+            color: white;
+            /* Menjadikan teks di footer berwarna putih */
+            padding: 15px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
 
         footer a {
             color: white;
@@ -90,6 +97,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Header -->
@@ -125,7 +133,7 @@
     </main>
 
     <!-- Second Section: Pelayanan Pengaduan Masyarakat -->
-    <header>
+    <!-- <header>
         Prosedur Pelayanan Pengaduan Masyarakat
     </header>
 
@@ -142,7 +150,7 @@
         </section>
 
 
-    </main>
+    </main> -->
 
     <!-- Footer -->
     <footer>
@@ -150,4 +158,5 @@
     </footer>
 
 </body>
+
 </html>
