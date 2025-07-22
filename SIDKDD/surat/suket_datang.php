@@ -1,4 +1,6 @@
-<?php include_once __DIR__ . '/../../config.php'; // menyesuaikan posisi file sekarang
+<?php
+
+include_once __DIR__ . '/../../config.php';
 include_once KONEKSI_PATH . '/konek3.php';
 
 ?>
