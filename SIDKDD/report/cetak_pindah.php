@@ -25,7 +25,7 @@ $tgl = date("d/m/y");
 	<div class="a4-container" style="font-family: 'Times New Roman', Times, serif; font-size: 11pt; padding: 20px;">
 		<table style="text-align: center; border-bottom: 3px solid black; padding-bottom: 10px; width: 100%;">
 			<tr>
-				<td style="width: 80px;"><img src="http://localhost/surat_keterangan_desa/SIDKDD/dist/img/logopes.png" width="70" height="90"> </td>
+				<td style="width: 80px;"><img src="https://desabogorejo.my.id/sidkdd/dist/img/logopes.png" width="70" height="90"> </td>
 				<td>
 					<div style="line-height: 1.3;">
 						<strong style="font-size: 16pt;">PEMERINTAH KABUPATEN PESAWARAN</strong><br>

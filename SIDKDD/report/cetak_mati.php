@@ -57,7 +57,7 @@ if (isset($_POST['Cetak'])) {
 		<table style="border-bottom: 2px solid black; padding-bottom: 10px; text-align: center;">
 			<tr>
 				<td style="width: 80px;">
-					<img src="http://localhost/surat_keterangan_desa/SIDKDD/dist/img/logopes.png" width="65" height="85">
+					<img src="https://desabogorejo.my.id/sidkdd/dist/img/logopes.png" width="65" height="85">
 				</td>
 				<td>
 					<strong style="font-size: 14pt;">PEMERINTAH KABUPATEN PESAWARAN</strong><br>
